@@ -1,6 +1,6 @@
 #Commons API wrapper
 
-Android API wrapper for [Wikimedia Commons](commons.wikimedia.org).
+Android API wrapper for [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page).
 
 This library is an efficient way to connect with the Wikimedia Commons [API](https://www.mediawiki.org/wiki/API:Main_page). The focus of this project is to make it easy to access the Commons API for Android developers by providing an accessible way to integrate this API into mobile applications. This wrapper only provides a basic stack of network features in terms of accessing remote APIs.
 

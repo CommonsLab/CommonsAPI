@@ -1,0 +1,3 @@
+<resources>
+    <string name="WIKIMEDIA_COMMONS_API">https://commons.wikimedia.org/w/api.php</string>
+</resources>

@@ -1,0 +1,102 @@
+
+         ****************************************************
+             <description></description> tag entry format:
+          ****************************************************
+
+                         Picture of the day
+         ****************************************************
+
+           <div class="floatright">
+           <table class="toccolours" style="width:300px;text-align:center">
+         
+           <tr>
+           <th lang="en">
+               <a href="/wiki/Commons:Picture_of_the_day"
+               title="Commons:Picture of the day">Picture of the day
+               </a>
+           </th>
+           </tr>
+         
+           <tr>
+           <td class="toccolours" style="padding:0">
+               <a href="/wiki/File:Buckow_Maerkische_Schweiz_08-2015_img5.jpg" class="image">
+         
+                   **************** File Name  ************************
+                  <img alt="Buckow Maerkische Schweiz 08-2015 img5.jpg"
+         
+                   ************** List of media links ******************
+                   ************ Extract only the first link ************
+
+                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Buckow_Maerkische_Schweiz_08-2015_img5.jpg/300px-Buckow_Maerkische_Schweiz_08-2015_img5.jpg" width="300" height="169"
+                   srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Buckow_Maerkische_Schweiz_08-2015_img5.jpg/450px-Buckow_Maerkische_Schweiz_08-2015_img5.jpg 1.5x,
+                   https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Buckow_Maerkische_Schweiz_08-2015_img5.jpg/600px-Buckow_Maerkische_Schweiz_08-2015_img5.jpg 2x" data-file-width="5379" data-file-height="3026"
+                   />
+                   </a>
+           </td>
+           </tr>
+         
+           <tr>
+           <td> <span lang="en" class="description en">
+               <a href="//en.wikipedia.org/wiki/Scherm%C3%BCtzelsee" class="extiw" title="en:Schermützelsee">Lake Schermützelsee</a> in
+               <a href="//en.wikipedia.org/wiki/Buckow" class="extiw" title="en:Buckow">Buckow (Märkische Schweiz)</a>, Brandenburg, Germany </span>&#160;
+           </td>
+           </tr>
+         
+           </table>
+           </div>
+         
+         
+         
+         ****************************************************
+
+               Media of the day
+         ****************************************************
+
+               <div class="floatright">
+                <table class="toccolours" style="width:300px;text-align:center">
+         
+                       <tr>
+                           <th lang="en">
+                               <a href="/wiki/Commons:Media_of_the_day" title="Commons:Media of the day">Media of the day</a>
+                           </th>
+                       </tr>
+         
+                       <tr>
+                         <td class="toccolours" style="padding:0">
+         
+                            <div id="mwe_player_16" class="PopUpMediaTransform"
+         
+                             ...
+                             >
+
+                             **************** File Name  **************************
+
+                             <img alt="File:Brand in petroleum- en asfaltfabriek.ogv"
+                             style="width:300px;height:245px"
+         
+                             ************** Media Thumbnail ************************
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Brand_in_petroleum-_en_asfaltfabriek.ogv/300px--Brand_in_petroleum-_en_asfaltfabriek.ogv.jpg"
+                             >
+                             </img>
+         
+                             ****************** Media streaming URL **************************
+                             <a href="https://upload.wikimedia.org/wikipedia/commons/9/9b/Brand_in_petroleum-_en_asfaltfabriek.ogv"
+                             title="Play media" target="new">
+                             <span class="play-btn-large">
+                             <span class="mw-tmh-playtext">Play media</span>
+                             </span>
+                             </a>
+         
+                             </div>
+                        </td>
+                        </tr>
+
+                       <tr>
+                       <td>
+                         <...............>
+                       </td>
+                       </tr>
+
+         
+              </table>
+               </div>

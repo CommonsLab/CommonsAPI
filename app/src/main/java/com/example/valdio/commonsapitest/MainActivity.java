@@ -1,27 +1,17 @@
 package com.example.valdio.commonsapitest;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import apiwrapper.commons.wikimedia.org.Commons;
 import apiwrapper.commons.wikimedia.org.Interfaces.CaptchaCallback;
@@ -40,11 +30,8 @@ import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Utils.UriToAbsolutePath;
 
 public class MainActivity extends AppCompatActivity {
+
     Commons commons;
-    ImageView captchaImage;
-
-    String captchaId;
-
 
     private static final int IMAGE_REQUEST_CODE = 101;
     private static final int SOUND_REQUEST_CODE = 201;
@@ -57,28 +44,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        captchaImage = (ImageView) findViewById(R.id.captcha);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                captchaImage.setBackground(getDrawable(R.drawable.upload_icon));
-//            }
-//        }
-
-
         commons = new Commons(getApplicationContext());
+        commons.getMediaOfTheDay(new RSS_FeedCallback() {
+            @Override
+            public void onFeedReceived(ArrayList<FeedItem> items) {
+                for (FeedItem feedItem : items) {
+                    Log.d("RSS_Feed", feedItem.getFileName());
+                    Log.d("RSS_Feed", feedItem.getMediaLink());
+                    Log.d("RSS_Feed", feedItem.getStreamingURL());
+                }
+            }
 
-//        commons.userLogin("valdioveliu", "valdio1veliu1", new LoginCallback() {
-//            @Override
-//            public void onLoginSuccessful() {
-//                Log.d("LoginStatus", "Succesfull");
-//            }
-//
-//            @Override
-//            public void onFailure() {
-//
-//            }
-//        });
+            @Override
+            public void onError(Exception error) {
+
+            }
+        });
 
 
 //        commons.getCaptcha(new CaptchaCallback() {
@@ -86,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
 //            public void onCaptchaReceived(Captcha captcha) {
 //                Log.wtf("Captcha", captcha.getCaptchaId());
 //                Log.wtf("Captcha", captcha.getCaptchaURL());
-//                Glide.with(getApplicationContext())
-//                        .load(captcha.getCaptchaURL())
-//                        .into(captchaImage);
-//                captchaId = captcha.getCaptchaId();
 //            }
 //
 //            @Override
@@ -112,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 //                startActivityForResult(Intent.createChooser(intent,
 //                        "Upload to Commons"), IMAGE_REQUEST_CODE);
 
+
 //                commons.searchInCommons("Tirana", "max", new ContributionsCallback() {
 //                    @Override
 //                    public void onContributionsReceived(ArrayList<Contribution> contributions) {
@@ -127,17 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 
-//                commons.userLogin("valdioveliu", "valdio1veliu1", new LoginCallback() {
-//                    @Override
-//                    public void onLoginSuccessful() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure() {
-//
-//                    }
-//                });
+
 //                commons.getMediaOfTheDay(new RSS_FeedCallback() {
 //                    @Override
 //                    public void onFeedReceived(ArrayList<FeedItem> items) {
@@ -175,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 //                        "testUsername2",
 //                        "passwordtest1",
 //                        "passwordtest1",
-//                        "valdioveliu@yahoo.com",
+//                        "email@email.com",
 //                        captchatext,
 //                        captchaId,
 //                        new CreateAccountCallback() {
@@ -192,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //                        }
 //                );
-
 
             }
         });
@@ -221,14 +188,11 @@ public class MainActivity extends AppCompatActivity {
                         "description",
                         Licenses.CreativeCommonsAttributionShareAlike30);
 
-
             }
 //            else if (requestCode == SOUND_REQUEST_CODE) {
 //
 //            } else if (requestCode == VIDEO_REQUEST_CODE) {
-//                uploadToCommons = file;
-//                DialogFragment dialog = new UploadDialog();
-//                dialog.show(getSupportFragmentManager(), "upload");
+//
 //            }
         }
     }

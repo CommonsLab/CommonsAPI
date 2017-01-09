@@ -69,7 +69,15 @@ public class RSS_FeedTask extends AsyncTask<Void, Void, String> {
         super.onPostExecute(s);
         if (items != null) {
             if (callback != null)
-                callback.onFeedReceived(items);
+                callback.onFeedReceived(reverse(items));
         }
+    }
+
+    //Feed items are parsed at reverse order
+    public ArrayList<FeedItem> reverse(ArrayList<FeedItem> list) {
+        for (int i = 0, j = list.size() - 1; i < j; i++) {
+            list.add(i, list.remove(j));
+        }
+        return list;
     }
 }

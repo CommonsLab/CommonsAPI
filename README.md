@@ -1,2 +1,170 @@
-# CommonsAPI
-Android API wrapper for Wikimedia Commons.
+#Commons API wrapper
+
+Android API wrapper for [Wikimedia Commons](commons.wikimedia.org).
+
+This library is an efficient way to connect with the Wikimedia Commons [API](https://www.mediawiki.org/wiki/API:Main_page). The focus of this project is to make it easy to access the Commons API for Android developers by providing an accessible way to integrate this API into mobile applications. This wrapper only provides a basic stack of network features in terms of accessing remote APIs.
+
+ I hope it makes it as easy as possible to access the large variety of multimedia files in Wikimedia Commons. 
+
+The API wrapper is built with the help of the [OkHttp](http://square.github.io/okhttp/) networking library and the [PersistentCookieJar](https://github.com/franmontiel/PersistentCookieJar) library for Cookie management through their persistent CookieJar implementation. Many thanks to this great contributions. 
+
+
+### Supported features
+
+*  Login
+
+*  Logout
+
+*  Create Account, captcha support 
+
+*  Load user contributions, Images / Videos / Audios 
+
+*  Upload media files, contributions
+
+*  Support for multiple [CC](https://en.wikipedia.org/wiki/Creative_Commons_license) licenses
+
+*  Search in Wikimedia Commons 
+
+*  Get the latest RSS Feed 
+   1. Picture of the day
+   2. Media of the day
+
+*  Extra features: 
+   1. Load image and video thumbnails 
+   2. Monitored upload progress 
+
+
+### Download 
+
+[![](https://jitpack.io/v/valdio/CommonsAPI.svg)](https://jitpack.io/#valdio/CommonsAPI)
+
+
+
+**PERMISSIONS**
+
+Add the following permissions in the `AndroidManifest.xml` file.
+
+```xm
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+
+
+
+**GRADLE**
+
+**Step 1.** Open `build.gradle(Module: app)` and add the JitPack repository to your build file
+
+```gradle
+
+repositories {
+	...
+	maven { url 'https://jitpack.io' }
+}
+```
+
+
+**Step 2.** Add the dependency
+
+```gradle
+dependencies {
+        compile 'com.github.valdio:CommonsAPI:1.0.2'
+}
+```
+
+
+### How to use the Commons API wrapper ?
+
+Create an instance of `Commons` passing a reference to the `Context`.
+
+```java
+Commons commons = new Commons(getApplicationContext());
+```
+
+To make use of the library call the defined methods from the `commons` instance. The following code snippets are some examples from the API wrapper methods. 
+
+- **Login example**
+
+```java
+commons.userLogin("username", "password", new LoginCallback() {
+    @Override
+    public void onLoginSuccessful() {
+      
+    }
+
+    @Override
+    public void onFailure() {
+
+    }
+});
+```
+
+- **Picture of the day RSS Feed**
+
+```java
+commons.getPictureOfTheDay(new RSS_FeedCallback() {
+    @Override
+    public void onFeedReceived(ArrayList<FeedItem> items) {
+        
+    }
+
+    @Override
+    public void onError(Exception error) {
+
+    }
+});
+```
+
+- **Search in Wikimedia Commons**
+
+```java
+commons.searchInCommons("Search String", "50", new ContributionsCallback() {
+    @Override
+    public void onContributionsReceived(ArrayList<Contribution> contributions) {
+
+    }
+
+    @Override
+    public void onFailure() {
+
+    }
+});
+```
+
+This call returns up to 50 `Contribution` objects in a list. The maximal number of contributions is up to 500, or set it to `max` to load the maximal number by default, 500 in this case.  
+
+- **Upload to Commons**
+
+
+```java
+File file = new File(...));// Contribution file
+
+User user = new User();
+user.setUsername("username");// all the upload needs the username
+commons.uploadContribution(
+        file,
+        user,
+        "title",
+        "comment",
+        "description",
+        Licenses.CreativeCommonsAttributionShareAlike30);// license class 
+
+```
+
+
+
+
+
+```
+License
+-------
+
+The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
+
+You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See Other Information below.
+
+http://creativecommons.org/publicdomain/zero/1.0/.
+
+```

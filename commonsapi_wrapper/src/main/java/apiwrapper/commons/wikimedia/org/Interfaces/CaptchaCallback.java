@@ -7,7 +7,10 @@ import apiwrapper.commons.wikimedia.org.Models.Captcha;
  */
 
 public interface CaptchaCallback {
-
+    /**
+     *
+     * @param captcha - {@link Captcha} info to return
+     */
     void onCaptchaReceived(Captcha captcha);
 
     void onFailure();

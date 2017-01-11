@@ -7,5 +7,9 @@ package apiwrapper.commons.wikimedia.org.Interfaces;
 public interface CreateAccountCallback {
     void onAccountCreatedSuccessful();
 
+    /**
+     *
+     * @param errorMessage Error, what went wrong
+     */
     void onFailure(String errorMessage);
 }

@@ -68,7 +68,7 @@ public class Commons {
     /**
      * Show a toast notification to the user
      *
-     * @param message - Notification text
+     * @param message Notification text
      */
     private void showToastMessage(String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
@@ -79,9 +79,9 @@ public class Commons {
      * Login call.
      * Perform the complete login operations
      *
-     * @param username - user credential
-     * @param password - user credential
-     * @param callBack - callback to return the login status, success or failure
+     * @param username user credential
+     * @param password user credential
+     * @param callBack callback to return the login status, success or failure
      */
     public void userLogin(String username, String password, LoginCallback callBack) {
         if (NetworkStatus.networkAvailable(context))
@@ -104,13 +104,13 @@ public class Commons {
      * CreateAccount call.
      * Perform the complete createAccount operations
      *
-     * @param username       - user credential
-     * @param password       - user credential
-     * @param retypePassword - user credential
-     * @param email          - user credential
-     * @param captchaWord    - captcha String entered by the user
-     * @param captchaId      - the Id of the captchaWord that needs to be verified in the API
-     * @param callBack       - callback to return the account creation status, account created or not
+     * @param username       user credential
+     * @param password       user credential
+     * @param retypePassword user credential
+     * @param email          user credential
+     * @param captchaWord    captcha String entered by the user
+     * @param captchaId      the Id of the captchaWord that needs to be verified in the API
+     * @param callBack       callback to return the account creation status, account created or not
      */
     public void createAccount(String username, String password, String retypePassword, String email, String captchaWord, String captchaId, CreateAccountCallback callBack) {
         if (NetworkStatus.networkAvailable(context))
@@ -124,7 +124,7 @@ public class Commons {
      * Method to load a captcha item form WikimediaCommons
      * Necessary in case of account creation
      *
-     * @param callback - callback to return a {@link apiwrapper.commons.wikimedia.org.Models.Captcha} item
+     * @param callback callback to return a {@link apiwrapper.commons.wikimedia.org.Models.Captcha} item
      */
     public void getCaptcha(CaptchaCallback callback) {
         if (NetworkStatus.networkAvailable(context))
@@ -137,10 +137,10 @@ public class Commons {
     /**
      * Load the Contributions of a user
      *
-     * @param username - Currently logged in user
-     * @param limit    - the number of Contributions to be loaded,
+     * @param username Currently logged in user
+     * @param limit    the number of Contributions to be loaded,
      *                 0 - 500, set limit to `max` to load 500 Contributions
-     * @param callback - callback to return the list of Contributions
+     * @param callback callback to return the list of Contributions
      */
     public void loadContributions(String username, String limit, ContributionsCallback callback) {
         if (NetworkStatus.networkAvailable(context))
@@ -153,10 +153,10 @@ public class Commons {
     /**
      * Search for Contributions based on a searchString
      *
-     * @param searchString - what to search for in WikimediaCommons?
-     * @param limit        - the number of Contributions to be loaded,
+     * @param searchString what to search for in WikimediaCommons?
+     * @param limit        the number of Contributions to be loaded,
      *                     0 - 500, set limit to `max` to load 500 Contributions
-     * @param callback     - callback to return the list of Contributions
+     * @param callback     callback to return the list of Contributions
      */
     public void searchInCommons(String searchString, String limit, ContributionsCallback callback) {
         if (NetworkStatus.networkAvailable(context))
@@ -171,7 +171,7 @@ public class Commons {
      * Get the last 10 items of the RSS feed of WikimediaCommons
      * The last 10 pictures of the day form the feed
      *
-     * @param rssFeedCallback - callback to return the list of {@link apiwrapper.commons.wikimedia.org.Models.FeedItem}
+     * @param rssFeedCallback callback to return the list of {@link apiwrapper.commons.wikimedia.org.Models.FeedItem}
      */
     public void getPictureOfTheDay(RSS_FeedCallback rssFeedCallback) {
         if (NetworkStatus.networkAvailable(context))
@@ -201,11 +201,11 @@ public class Commons {
      * Assign the height and width of the requested thumbnail
      * Width and Height might come slightly changed from the required
      *
-     * @param FileName        - The name of Contribution whose thumbnail is required
+     * @param FileName        The name of Contribution whose thumbnail is required
      *                        //FileName -> File:Some_Image/Video_Name.png
-     * @param thumbnailWidth  - width of the requested thumbnail
-     * @param thumbnailHeight - height of the requested thumbnail
-     * @param callback        - callback to return a {@link apiwrapper.commons.wikimedia.org.Models.Thumbnail} item
+     * @param thumbnailWidth  width of the requested thumbnail
+     * @param thumbnailHeight height of the requested thumbnail
+     * @param callback        callback to return a {@link apiwrapper.commons.wikimedia.org.Models.Thumbnail} item
      */
     public void loadThumbnail(String FileName, int thumbnailWidth, int thumbnailHeight, ThumbnailCallback callback) {
         if (NetworkStatus.networkAvailable(context))
@@ -219,12 +219,12 @@ public class Commons {
      * Upload method for uploading Contribution files
      * The following methods can be used to upload files with a upload progress Notification
      *
-     * @param file            = Contribution file to be uploaded
-     * @param user            = The currently logged in user
-     * @param title           = Title of the Contribution media
-     * @param comment         = A comment on the Contribution
-     * @param descriptionText = A description on the what is being uploaded
-     * @param license         = The license string under which the Contribution will be uploaded
+     * @param file            Contribution file to be uploaded
+     * @param user            The currently logged in user
+     * @param title           Title of the Contribution media
+     * @param comment         A comment on the Contribution
+     * @param descriptionText A description on the what is being uploaded
+     * @param license         The license string under which the Contribution will be uploaded
      */
     public void uploadContribution(File file, User user, String title, String comment, String descriptionText, String license) {
         if (NetworkStatus.networkAvailable(context))
@@ -237,12 +237,12 @@ public class Commons {
     /**
      * Upload method for uploading Contribution files without showing the upload progress
      *
-     * @param file            = Contribution file to be uploaded
-     * @param user            = The currently logged in user
-     * @param title           = Title of the Contribution media
-     * @param comment         = A comment on the Contribution
-     * @param descriptionText = A description on the what is being uploaded
-     * @param license         = The license string under which the Contribution will be uploaded
+     * @param file            Contribution file to be uploaded
+     * @param user            The currently logged in user
+     * @param title           Title of the Contribution media
+     * @param comment         A comment on the Contribution
+     * @param descriptionText A description on the what is being uploaded
+     * @param license         The license string under which the Contribution will be uploaded
      */
     public void uploadContributionWithoutProgress(File file, User user, String title, String comment, String descriptionText, String license) {
         if (NetworkStatus.networkAvailable(context))

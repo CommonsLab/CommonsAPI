@@ -9,7 +9,10 @@ import apiwrapper.commons.wikimedia.org.Models.FeedItem;
  */
 
 public interface RSS_FeedCallback {
+    /**
+     * @param feedItems List of {@link FeedItem} objects
+     */
     void onFeedReceived(ArrayList<FeedItem> feedItems);
 
-    void onError(Exception error);
+    void onError();
 }

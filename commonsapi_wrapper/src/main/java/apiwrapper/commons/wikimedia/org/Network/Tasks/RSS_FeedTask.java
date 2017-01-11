@@ -59,7 +59,7 @@ public class RSS_FeedTask extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         } catch (XmlPullParserException | IOException e) {
             if (callback != null)
-                callback.onError(e);
+                callback.onError();
         }
         return null;
     }

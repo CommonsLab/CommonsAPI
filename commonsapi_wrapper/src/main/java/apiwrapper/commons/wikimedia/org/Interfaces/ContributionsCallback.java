@@ -9,6 +9,10 @@ import apiwrapper.commons.wikimedia.org.Models.Contribution;
  */
 
 public interface ContributionsCallback {
+    /**
+     *
+     * @param contributions list of {@link Contribution} objects
+     */
     void onContributionsReceived(ArrayList<Contribution> contributions);
 
     void onFailure();

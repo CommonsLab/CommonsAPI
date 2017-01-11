@@ -60,7 +60,7 @@ Add the following permissions in the `AndroidManifest.xml` file.
 ```gradle
 
 repositories {
-	...
+	//...
 	maven { url 'https://jitpack.io' }
 }
 ```
@@ -70,7 +70,7 @@ repositories {
 
 ```gradle
 dependencies {
-        compile 'com.github.valdio:CommonsAPI:1.0.2'
+	    compile 'com.github.valdio:CommonsAPI:1.0.3'
 }
 ```
 

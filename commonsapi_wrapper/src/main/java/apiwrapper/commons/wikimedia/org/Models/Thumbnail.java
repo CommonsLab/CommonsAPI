@@ -15,6 +15,7 @@ public class Thumbnail {
         this.thumbnailHeight = thumbnailHeight;
     }
 
+
     public String getThumbnailURL() {
         return thumbnailURL;
     }

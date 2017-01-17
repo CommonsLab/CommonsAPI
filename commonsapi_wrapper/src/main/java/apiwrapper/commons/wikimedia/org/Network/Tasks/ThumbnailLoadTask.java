@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import apiwrapper.commons.wikimedia.org.Interfaces.ThumbnailCallback;
+import apiwrapper.commons.wikimedia.org.Models.Thumbnail;
 import apiwrapper.commons.wikimedia.org.Network.API;
 import apiwrapper.commons.wikimedia.org.Network.RequestBuilder;
 import okhttp3.OkHttpClient;
@@ -59,7 +60,7 @@ public class ThumbnailLoadTask extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean success) {
         if (success && !thumbnailURL.equals("")) {
             //Callback method to return thumbnail details
-            callback.onThumbnailAvailable(thumbnailURL, thumbwidth, thumbheight);
+            callback.onThumbnailAvailable(new Thumbnail(thumbnailURL, Integer.parseInt(thumbwidth), Integer.parseInt(thumbheight)));
         } else {
             callback.onError();
         }

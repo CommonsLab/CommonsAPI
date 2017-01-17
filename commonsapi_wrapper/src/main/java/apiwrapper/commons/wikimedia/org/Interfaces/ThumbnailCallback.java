@@ -1,16 +1,16 @@
 package apiwrapper.commons.wikimedia.org.Interfaces;
 
+import apiwrapper.commons.wikimedia.org.Models.Thumbnail;
+
 /**
  * Created by Valdio Veliu on 05/01/2017.
  */
 
 public interface ThumbnailCallback {
     /**
-     * @param thumbnailURL URL to the thumbnail
-     * @param thumbwidth   actual width of the thumbnail
-     * @param thumbheight  actual height of the thumbnail
+     * @param thumbnail {@link Thumbnail} object with the requested info, url, width, height
      */
-    void onThumbnailAvailable(String thumbnailURL, String thumbwidth, String thumbheight);
+    void onThumbnailAvailable(Thumbnail thumbnail);
 
     void onError();
 }

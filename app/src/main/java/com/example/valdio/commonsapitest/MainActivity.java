@@ -45,18 +45,39 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         commons = new Commons(getApplicationContext());
-        commons.getMediaOfTheDay(new RSS_FeedCallback() {
+//        commons.getMediaOfTheDay(new RSS_FeedCallback() {
+//            @Override
+//            public void onFeedReceived(ArrayList<FeedItem> items) {
+//                for (FeedItem feedItem : items) {
+//                    Log.d("RSS_Feed", feedItem.getFileName());
+//                    Log.d("RSS_Feed", feedItem.getMediaLink());
+//                    Log.d("RSS_Feed", feedItem.getStreamingURL());
+//                }
+//            }
+//
+//            @Override
+//            public void onError() {
+//
+//            }
+//        });
+
+
+        commons.searchInCommons("Caenorhabditis elegans", "max", new ContributionsCallback() {
             @Override
-            public void onFeedReceived(ArrayList<FeedItem> items) {
-                for (FeedItem feedItem : items) {
-                    Log.d("RSS_Feed", feedItem.getFileName());
-                    Log.d("RSS_Feed", feedItem.getMediaLink());
-                    Log.d("RSS_Feed", feedItem.getStreamingURL());
+            public void onContributionsReceived(ArrayList<Contribution> contributions) {
+                for (Contribution contribution : contributions) {
+                    Log.d("Contribution", contribution.getTitle());
+                    Log.d("Contribution", contribution.getUrl());
+                    try {
+                        Log.d("Contribution", contribution.getDuration());
+                    }catch (Exception e){
+
+                    }
                 }
             }
 
             @Override
-            public void onError() {
+            public void onFailure() {
 
             }
         });

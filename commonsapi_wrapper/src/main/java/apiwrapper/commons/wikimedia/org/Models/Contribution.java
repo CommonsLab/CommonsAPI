@@ -9,12 +9,13 @@ import android.os.Parcelable;
 
 public class Contribution implements Parcelable {
 
-
     private String title;
     private String url;
     private String descriptionurl;
     private String mediatype;
     private String ns;
+    private String duration; // used for Audio, Video duration.
+                             // Don't use for images, throws Exception
     private int width;
     private int height;
 
@@ -23,6 +24,7 @@ public class Contribution implements Parcelable {
         url = in.readString();
         descriptionurl = in.readString();
         mediatype = in.readString();
+        duration = in.readString();
         ns = in.readString();
         width = in.readInt();
         height = in.readInt();
@@ -97,10 +99,17 @@ public class Contribution implements Parcelable {
         this.ns = ns;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     public Contribution() {
 
     }
-
 
     @Override
     public int describeContents() {
@@ -114,6 +123,7 @@ public class Contribution implements Parcelable {
         dest.writeString(descriptionurl);
         dest.writeString(mediatype);
         dest.writeString(ns);
+        dest.writeString(duration);
         dest.writeInt(width);
         dest.writeInt(height);
     }

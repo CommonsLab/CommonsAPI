@@ -147,7 +147,7 @@ public class RequestBuilder {
                 .addQueryParameter("list", "allimages")
                 .addQueryParameter("format", "json")
                 .addQueryParameter("aisort", "timestamp")
-                .addEncodedQueryParameter("aiprop", "url%7Cmediatype")
+                .addEncodedQueryParameter("aiprop", "url%7Cmediatype%7Cdimensions")
                 .addQueryParameter("aiuser", username)
                 .addQueryParameter("ailimit", limit)
                 .build();
@@ -168,7 +168,7 @@ public class RequestBuilder {
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
                 .addQueryParameter("list", "allimages")
-                .addEncodedQueryParameter("aiprop", "url%7Cmediatype")
+                .addEncodedQueryParameter("aiprop", "url%7Cmediatype%7Cdimensions")
                 .addQueryParameter("aiprefix", searchString)
                 .addQueryParameter("ailimit", limit)
                 .build();

@@ -29,6 +29,11 @@ public class JsonParser {
 
             for (int i = 0; i < AllImages.length(); i++) {
                 Contribution data = new Contribution();
+                try {
+                    data.setDuration(AllImages.getJSONObject(i).getString("duration"));
+                } catch (JSONException e) {
+                    // only video and audio files have duration
+                }
                 data.setUrl(AllImages.getJSONObject(i).getString("url"));
                 data.setDescriptionurl(AllImages.getJSONObject(i).getString("descriptionurl"));
                 data.setMediatype(AllImages.getJSONObject(i).getString("mediatype"));

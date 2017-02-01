@@ -86,6 +86,16 @@ public class RequestBuilder {
                 .build();
     }
 
+    //ResetPassword request
+    public static RequestBody ResetPassword(String email) {
+        return new FormBody.Builder()
+                .add("action", "resetpassword")
+                .add("format", "json")
+                .add("email", email)
+                .add("token", "+\\")
+                .build();
+    }
+
     //Get Captcha
     public static HttpUrl getCaptchaRequest() {
         return new HttpUrl.Builder()

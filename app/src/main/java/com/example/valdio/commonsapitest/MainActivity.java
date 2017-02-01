@@ -1,6 +1,7 @@
 package com.example.valdio.commonsapitest;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import apiwrapper.commons.wikimedia.org.Commons;
@@ -20,6 +31,7 @@ import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.LoginCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.LogoutCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.RSS_FeedCallback;
+import apiwrapper.commons.wikimedia.org.Interfaces.ResetPasswordCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ThumbnailCallback;
 import apiwrapper.commons.wikimedia.org.Models.Captcha;
 import apiwrapper.commons.wikimedia.org.Models.Contribution;
@@ -27,7 +39,10 @@ import apiwrapper.commons.wikimedia.org.Models.FeedItem;
 import apiwrapper.commons.wikimedia.org.Models.Licenses;
 import apiwrapper.commons.wikimedia.org.Models.Thumbnail;
 import apiwrapper.commons.wikimedia.org.Models.User;
+import apiwrapper.commons.wikimedia.org.Network.API;
+import apiwrapper.commons.wikimedia.org.Network.RequestBuilder;
 import apiwrapper.commons.wikimedia.org.Utils.UriToAbsolutePath;
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int SOUND_REQUEST_CODE = 201;
     private static final int VIDEO_REQUEST_CODE = 301;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +61,25 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         commons = new Commons(getApplicationContext());
+        //get edit token for user to upload to  WIKIMEDIA_COMMONS
+
+        commons.resetPassword("valdioveliu@gmail.com", new ResetPasswordCallback() {
+            @Override
+            public void onRequestSuccess() {
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                Log.d("errorMessage", errorMessage);
+
+            }
+
+
+        });
+
 //        commons.getMediaOfTheDay(new RSS_FeedCallback() {
 //            @Override
 //            public void onFeedReceived(ArrayList<FeedItem> items) {
@@ -62,27 +97,6 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-        commons.searchInCommons("Caenorhabditis elegans", "max", new ContributionsCallback() {
-            @Override
-            public void onContributionsReceived(ArrayList<Contribution> contributions) {
-                for (Contribution contribution : contributions) {
-                    Log.d("Contribution", contribution.getTitle());
-                    Log.d("Contribution", contribution.getUrl());
-                    try {
-                        Log.d("Contribution", contribution.getDuration());
-                    }catch (Exception e){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        });
-
-
 //        commons.getCaptcha(new CaptchaCallback() {
 //            @Override
 //            public void onCaptchaReceived(Captcha captcha) {
@@ -97,9 +111,11 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(new View.OnClickListener()
+
+                               {
+                                   @Override
+                                   public void onClick(View view) {
 
 
 //                Upload local image
@@ -182,8 +198,10 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                );
 
-            }
-        });
+                                   }
+                               }
+
+        );
     }
 
     @Override

@@ -16,6 +16,7 @@ import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.LoginCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.LogoutCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.RSS_FeedCallback;
+import apiwrapper.commons.wikimedia.org.Interfaces.ResetPasswordCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ThumbnailCallback;
 import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.CreateAccountTask;
@@ -23,6 +24,7 @@ import apiwrapper.commons.wikimedia.org.Network.Tasks.GetCaptchaTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.LoadContributionsTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.LogoutTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.RSS_FeedTask;
+import apiwrapper.commons.wikimedia.org.Network.Tasks.ResetPasswordTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.SearchContributionsTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.ThumbnailLoadTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.UploadContributionTask;
@@ -96,6 +98,19 @@ public class Commons {
     public void userLogout(LogoutCallback callBack) {
         if (NetworkStatus.networkAvailable(context))
             new LogoutTask(context, client, callBack).execute();
+        else
+            showToastMessage("Network Offline");
+    }
+
+    /**
+     * {@link ResetPasswordTask} reset the username
+     *
+     * @param email    Email of the account
+     * @param callBack
+     */
+    public void resetPassword(String email, ResetPasswordCallback callBack) {
+        if (NetworkStatus.networkAvailable(context))
+            new ResetPasswordTask(context, client, email, callBack).execute();
         else
             showToastMessage("Network Offline");
     }

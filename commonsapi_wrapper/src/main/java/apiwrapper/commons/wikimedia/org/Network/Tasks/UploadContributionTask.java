@@ -36,7 +36,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private String editToken;
     private String license;
 
-
+    private int uploadIconResourceId = R.drawable.upload_icon;
     //Progress bar
     private NotificationManager notificationManager;
     private NotificationCompat.Builder builder;
@@ -44,7 +44,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private boolean showProgressNotification = true;
 
 
-    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, String license) {
+    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, String license, int uploadIconResourceId) {
         this.context = context;
         this.client = client;
         this.file = file;
@@ -53,6 +53,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         this.comment = comment;
         this.descriptionText = descriptionText;
         this.license = license;
+        this.uploadIconResourceId = uploadIconResourceId;
     }
 
     public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, String license, boolean disableProgress) {
@@ -109,7 +110,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         builder = new NotificationCompat.Builder(context);
         builder.setContentTitle("Uploading...")
                 .setContentText("Upload in progress")
-                .setSmallIcon(R.drawable.upload_icon);
+                .setSmallIcon(uploadIconResourceId);
 
         // Displays the progress bar for the first time.
         builder.setProgress(100, 0, false);

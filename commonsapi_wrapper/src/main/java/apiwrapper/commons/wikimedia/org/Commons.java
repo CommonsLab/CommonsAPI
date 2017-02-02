@@ -241,9 +241,9 @@ public class Commons {
      * @param descriptionText A description on the what is being uploaded
      * @param license         The license string under which the Contribution will be uploaded
      */
-    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, String license) {
+    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, String license, int uploadIconResourceId) {
         if (NetworkStatus.networkAvailable(context))
-            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, license).execute();
+            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, license, uploadIconResourceId).execute();
         else
             showToastMessage("Network Offline");
     }

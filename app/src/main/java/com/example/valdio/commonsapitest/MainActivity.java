@@ -1,7 +1,6 @@
 package com.example.valdio.commonsapitest;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
     Commons commons;
 
     private static final int IMAGE_REQUEST_CODE = 101;
-    private static final int SOUND_REQUEST_CODE = 201;
-    private static final int VIDEO_REQUEST_CODE = 301;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         commons = new Commons(getApplicationContext());
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
 
-        commons.resetPassword("valdioveliu@gmail.com", new ResetPasswordCallback() {
+        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
             @Override
             public void onRequestSuccess() {
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
@@ -225,14 +217,9 @@ public class MainActivity extends AppCompatActivity {
                         "title",
                         "comment",
                         "description",
-                        Licenses.CreativeCommonsAttributionShareAlike30);
+                        Licenses.CreativeCommonsAttributionShareAlike30, R.drawable.upload_to_commons_icon);
 
             }
-//            else if (requestCode == SOUND_REQUEST_CODE) {
-//
-//            } else if (requestCode == VIDEO_REQUEST_CODE) {
-//
-//            }
         }
     }
 

@@ -150,7 +150,7 @@ commons.uploadContribution(
         "comment",
         "description",
         Licenses.CreativeCommonsAttributionShareAlike30,  // license class 
-	R.drawable.upload_icon);
+        R.drawable.upload_icon);
 
 ```
 

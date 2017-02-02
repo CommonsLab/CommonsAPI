@@ -10,6 +10,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 
 import java.io.File;
 
+import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
 import apiwrapper.commons.wikimedia.org.Interfaces.CaptchaCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ContributionsCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
@@ -234,16 +235,17 @@ public class Commons {
      * Upload method for uploading Contribution files
      * The following methods can be used to upload files with a upload progress Notification
      *
-     * @param file            Contribution file to be uploaded
-     * @param user            The currently logged in user
-     * @param title           Title of the Contribution media
-     * @param comment         A comment on the Contribution
-     * @param descriptionText A description on the what is being uploaded
-     * @param license         The license string under which the Contribution will be uploaded
+     * @param file             Contribution file to be uploaded
+     * @param user             The currently logged in user
+     * @param title            Title of the Contribution media
+     * @param comment          A comment on the Contribution
+     * @param descriptionText  A description on the what is being uploaded
+     * @param contributionType The type of the media that is being uploaded IMAGE, VIDEO or AUDIO
+     * @param license          The license string under which the Contribution will be uploaded
      */
-    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, String license, int uploadIconResourceId) {
+    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId) {
         if (NetworkStatus.networkAvailable(context))
-            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, license, uploadIconResourceId).execute();
+            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, uploadIconResourceId).execute();
         else
             showToastMessage("Network Offline");
     }
@@ -252,16 +254,17 @@ public class Commons {
     /**
      * Upload method for uploading Contribution files without showing the upload progress
      *
-     * @param file            Contribution file to be uploaded
-     * @param user            The currently logged in user
-     * @param title           Title of the Contribution media
-     * @param comment         A comment on the Contribution
-     * @param descriptionText A description on the what is being uploaded
-     * @param license         The license string under which the Contribution will be uploaded
+     * @param file             Contribution file to be uploaded
+     * @param user             The currently logged in user
+     * @param title            Title of the Contribution media
+     * @param comment          A comment on the Contribution
+     * @param descriptionText  A description on the what is being uploaded
+     * @param contributionType The type of the media that is being uploaded IMAGE, VIDEO or AUDIO
+     * @param license          The license string under which the Contribution will be uploaded
      */
-    public void uploadContributionWithoutProgress(File file, User user, String title, String comment, String descriptionText, String license) {
+    public void uploadContributionWithoutProgress(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license) {
         if (NetworkStatus.networkAvailable(context))
-            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, license, false).execute();
+            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, false).execute();
         else
             showToastMessage("Network Offline");
     }

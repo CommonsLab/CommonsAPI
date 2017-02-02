@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 
+import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
 import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Network.API;
 import apiwrapper.commons.wikimedia.org.Network.NetworkUtils.MonitoredUploadRequest;
@@ -35,8 +36,10 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private String descriptionText;
     private String editToken;
     private String license;
+    private ContributionType contributionType;
 
-    private int uploadIconResourceId = R.drawable.upload_icon;
+
+    private int uploadIconResourceId;
     //Progress bar
     private NotificationManager notificationManager;
     private NotificationCompat.Builder builder;
@@ -44,7 +47,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private boolean showProgressNotification = true;
 
 
-    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, String license, int uploadIconResourceId) {
+    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId) {
         this.context = context;
         this.client = client;
         this.file = file;
@@ -52,11 +55,13 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         this.title = title;
         this.comment = comment;
         this.descriptionText = descriptionText;
+        this.contributionType = contributionType;
         this.license = license;
         this.uploadIconResourceId = uploadIconResourceId;
+
     }
 
-    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, String license, boolean disableProgress) {
+    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, boolean showProgressNotification) {
         this.context = context;
         this.client = client;
         this.file = file;
@@ -64,9 +69,10 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         this.title = title;
         this.comment = comment;
         this.descriptionText = descriptionText;
+        this.contributionType = contributionType;
         this.license = license;
         //don't show progress notification
-        showProgressNotification = false;
+        this.showProgressNotification = showProgressNotification;
     }
 
     @Override
@@ -151,10 +157,10 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
             //get image format
             String fileName = file.getName();
             String imageFormat = fileName.substring(fileName.lastIndexOf(".") + 1);
-            imageFormat.toLowerCase();
+            imageFormat = imageFormat.toLowerCase();
 
             //MediaType MEDIA_TYPE = MediaType.parse("image/png");
-            MediaType MEDIA_TYPE = MediaType.parse("image/" + imageFormat);
+            MediaType MEDIA_TYPE = MediaType.parse(contributionType.toString().toLowerCase() + "/" + imageFormat);
 
             boolean uploadedSuccessfully = UPLOAD(title, imageFormat, token, MEDIA_TYPE);
 

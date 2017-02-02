@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import apiwrapper.commons.wikimedia.org.Commons;
+import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
 import apiwrapper.commons.wikimedia.org.Interfaces.CaptchaCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ContributionsCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
@@ -36,6 +37,7 @@ import apiwrapper.commons.wikimedia.org.Models.Thumbnail;
 import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Network.API;
 import apiwrapper.commons.wikimedia.org.Network.RequestBuilder;
+import apiwrapper.commons.wikimedia.org.Network.Tasks.UploadContributionTask;
 import apiwrapper.commons.wikimedia.org.Utils.UriToAbsolutePath;
 import okhttp3.OkHttpClient;
 
@@ -54,23 +56,23 @@ public class MainActivity extends AppCompatActivity {
 
         commons = new Commons(getApplicationContext());
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
-
-        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
-            @Override
-            public void onRequestSuccess() {
-                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
-                Log.d("errorMessage", errorMessage);
-
-            }
-
-
-        });
+//
+//        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
+//            @Override
+//            public void onRequestSuccess() {
+//                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(String errorMessage) {
+//                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+//                Log.d("errorMessage", errorMessage);
+//
+//            }
+//
+//
+//        });
 
 //        commons.getMediaOfTheDay(new RSS_FeedCallback() {
 //            @Override
@@ -111,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 //                Upload local image
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-//                startActivityForResult(Intent.createChooser(intent,
-//                        "Upload to Commons"), IMAGE_REQUEST_CODE);
+                                       Intent intent = new Intent();
+                                       intent.setType("image/*");
+                                       intent.setAction(Intent.ACTION_GET_CONTENT);
+                                       intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                                       startActivityForResult(Intent.createChooser(intent,
+                                               "Upload to Commons"), IMAGE_REQUEST_CODE);
 
 
 //                commons.searchInCommons("Tirana", "max", new ContributionsCallback() {
@@ -217,7 +219,9 @@ public class MainActivity extends AppCompatActivity {
                         "title",
                         "comment",
                         "description",
-                        Licenses.CreativeCommonsAttributionShareAlike30, R.drawable.upload_to_commons_icon);
+                        ContributionType.IMAGE,
+                        Licenses.CreativeCommonsAttributionShareAlike30,
+                        R.drawable.upload_icon);
 
             }
         }

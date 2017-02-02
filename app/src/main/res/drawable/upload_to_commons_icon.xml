@@ -1,9 +1,0 @@
-<!--Logo downloaded from Wikimedia Commons, the free media repository  -->
-<!--https://commons.wikimedia.org/wiki/File:Circle-icons-upload.svg-->
-
-<vector android:height="24dp" android:viewportHeight="64.0"
-    android:viewportWidth="64.0" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="#03A9F4" android:pathData="M32,32m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0"/>
-    <path android:fillAlpha="0.2" android:fillColor="#231F20" android:pathData="M48,32c0,-8.84 -7.16,-16 -16,-16c-7.5,0 -13.77,5.16 -15.51,12.13C11.69,28.85 8,32.99 8,38c0,5.52 4.48,10 10,10h8c1.11,0 2,-0.89 2,-2v-5.5c0,-0.83 -0.67,-1.5 -1.5,-1.5h-3.06c-1.47,0 -1.88,-1.01 -0.91,-2.24l7.71,-9.83c0.97,-1.24 2.56,-1.24 3.52,0l7.71,9.83C42.44,37.99 42.03,39 40.56,39H37.5c-0.83,0 -1.5,0.67 -1.5,1.5V46c0,1.11 0.89,2 2,2h10c4.42,0 8,-3.58 8,-8S52.42,32 48,32z"/>
-    <path android:fillColor="#FFFFFF" android:pathData="M48,30c0,-8.84 -7.16,-16 -16,-16c-7.5,0 -13.77,5.16 -15.51,12.13C11.69,26.85 8,30.99 8,36c0,5.52 4.48,10 10,10h8c1.11,0 2,-0.89 2,-2v-5.5c0,-0.83 -0.67,-1.5 -1.5,-1.5h-3.06c-1.47,0 -1.88,-1.01 -0.91,-2.24l7.71,-9.83c0.97,-1.24 2.56,-1.24 3.52,0l7.71,9.83C42.44,35.99 42.03,37 40.56,37H37.5c-0.83,0 -1.5,0.67 -1.5,1.5V44c0,1.11 0.89,2 2,2h10c4.42,0 8,-3.58 8,-8S52.42,30 48,30z"/>
-</vector>

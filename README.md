@@ -149,7 +149,8 @@ commons.uploadContribution(
         "title",
         "comment",
         "description",
-        Licenses.CreativeCommonsAttributionShareAlike30);// license class 
+        Licenses.CreativeCommonsAttributionShareAlike30,  // license class 
+	R.drawable.upload_icon);
 
 ```
 

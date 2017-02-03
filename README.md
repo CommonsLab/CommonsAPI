@@ -151,7 +151,17 @@ commons.uploadContribution(
         "description",
         ContributionType.IMAGE,
         Licenses.CreativeCommonsAttributionShareAlike30,  // license class 
-        R.drawable.upload_icon);
+        R.drawable.upload_icon,
+        new UploadCallback() {
+            @Override
+            public void onMediaUploadedSuccessfully() {
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
 ```
 
 

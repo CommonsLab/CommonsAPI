@@ -29,6 +29,7 @@ import apiwrapper.commons.wikimedia.org.Interfaces.LogoutCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.RSS_FeedCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ResetPasswordCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ThumbnailCallback;
+import apiwrapper.commons.wikimedia.org.Interfaces.UploadCallback;
 import apiwrapper.commons.wikimedia.org.Models.Captcha;
 import apiwrapper.commons.wikimedia.org.Models.Contribution;
 import apiwrapper.commons.wikimedia.org.Models.FeedItem;
@@ -221,7 +222,17 @@ public class MainActivity extends AppCompatActivity {
                         "description",
                         ContributionType.IMAGE,
                         Licenses.CreativeCommonsAttributionShareAlike30,
-                        R.drawable.upload_icon);
+                        R.drawable.upload_icon,
+                        new UploadCallback() {
+                            @Override
+                            public void onMediaUploadedSuccessfully() {
+                            }
+
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                            }
+                        });
 
             }
         }

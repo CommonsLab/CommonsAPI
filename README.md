@@ -70,7 +70,7 @@ repositories {
 
 ```gradle
 dependencies {
-	    compile 'com.github.valdio:CommonsAPI:1.0.7'
+	    compile 'com.github.valdio:CommonsAPI:1.0.8'
 }
 ```
 
@@ -152,7 +152,6 @@ commons.uploadContribution(
         ContributionType.IMAGE,
         Licenses.CreativeCommonsAttributionShareAlike30,  // license class 
         R.drawable.upload_icon);
-
 ```
 
 

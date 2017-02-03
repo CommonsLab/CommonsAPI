@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
+import apiwrapper.commons.wikimedia.org.Interfaces.UploadCallback;
 import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Network.API;
 import apiwrapper.commons.wikimedia.org.Network.NetworkUtils.MonitoredUploadRequest;
@@ -38,6 +39,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private String license;
     private ContributionType contributionType;
 
+    private UploadCallback callback;
 
     private int uploadIconResourceId;
     //Progress bar
@@ -46,8 +48,9 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     private int notificationId = 1001;
     private boolean showProgressNotification = true;
 
+    String response;
 
-    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId) {
+    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId, UploadCallback callback) {
         this.context = context;
         this.client = client;
         this.file = file;
@@ -58,10 +61,11 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         this.contributionType = contributionType;
         this.license = license;
         this.uploadIconResourceId = uploadIconResourceId;
+        this.callback = callback;
 
     }
 
-    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, boolean showProgressNotification) {
+    public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, boolean showProgressNotification, UploadCallback callback) {
         this.context = context;
         this.client = client;
         this.file = file;
@@ -71,6 +75,8 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         this.descriptionText = descriptionText;
         this.contributionType = contributionType;
         this.license = license;
+        this.callback = callback;
+
         //don't show progress notification
         this.showProgressNotification = showProgressNotification;
     }
@@ -179,7 +185,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         MonitoredUploadRequest.Listener listener = new MonitoredUploadRequest.Listener() {
             @Override
             public void onProgress(int progress) {
-                Log.d("Upload Status", progress + "%");
+                Log.d("Commons Upload Status", progress + "%");
 
                 if (showProgressNotification) {
                     if (progress > 0)
@@ -205,7 +211,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
 
 
         try {
-            String response = API.POST(client, context.getString(R.string.WIKIMEDIA_COMMONS_API), monitoredRequest);
+            response = API.POST(client, context.getString(R.string.WIKIMEDIA_COMMONS_API), monitoredRequest);
 
             //Parse JSON response
             //check if successful upload
@@ -218,5 +224,29 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
             return false;
         }
         return false;
+    }
+
+
+    @Override
+    protected void onPostExecute(Boolean uploadedSuccessfully) {
+        super.onPostExecute(uploadedSuccessfully);
+        if (uploadedSuccessfully) {
+            callback.onMediaUploadedSuccessfully();
+        } else {
+            String errorMessage = "Failed to upload media";
+            //Parse JSON error
+            if (errorMessage != null)
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONObject error = jsonResponse.getJSONObject("error");
+                    String info = error.getString("info");
+                    if (info != null)
+                        errorMessage = info;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onFailure(errorMessage);
+                }
+            callback.onFailure(errorMessage);
+        }
     }
 }

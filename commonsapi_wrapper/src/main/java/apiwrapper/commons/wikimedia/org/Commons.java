@@ -19,6 +19,7 @@ import apiwrapper.commons.wikimedia.org.Interfaces.LogoutCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.RSS_FeedCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ResetPasswordCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ThumbnailCallback;
+import apiwrapper.commons.wikimedia.org.Interfaces.UploadCallback;
 import apiwrapper.commons.wikimedia.org.Models.User;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.CreateAccountTask;
 import apiwrapper.commons.wikimedia.org.Network.Tasks.GetCaptchaTask;
@@ -243,9 +244,9 @@ public class Commons {
      * @param contributionType The type of the media that is being uploaded IMAGE, VIDEO or AUDIO
      * @param license          The license string under which the Contribution will be uploaded
      */
-    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId) {
+    public void uploadContribution(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId, UploadCallback callback) {
         if (NetworkStatus.networkAvailable(context))
-            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, uploadIconResourceId).execute();
+            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, uploadIconResourceId, callback).execute();
         else
             showToastMessage("Network Offline");
     }
@@ -262,9 +263,9 @@ public class Commons {
      * @param contributionType The type of the media that is being uploaded IMAGE, VIDEO or AUDIO
      * @param license          The license string under which the Contribution will be uploaded
      */
-    public void uploadContributionWithoutProgress(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license) {
+    public void uploadContributionWithoutProgress(File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, UploadCallback callback) {
         if (NetworkStatus.networkAvailable(context))
-            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, false).execute();
+            new UploadContributionTask(context, client, file, user, title, comment, descriptionText, contributionType, license, false, callback).execute();
         else
             showToastMessage("Network Offline");
     }

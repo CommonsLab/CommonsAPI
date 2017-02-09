@@ -50,7 +50,7 @@ public class Commons {
      * @param context
      */
     public Commons(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
 
         if (client == null)
             initOkHttpClient();

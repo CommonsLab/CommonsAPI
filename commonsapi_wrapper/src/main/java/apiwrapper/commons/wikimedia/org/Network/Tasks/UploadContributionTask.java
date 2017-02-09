@@ -4,7 +4,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -185,12 +184,13 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         MonitoredUploadRequest.Listener listener = new MonitoredUploadRequest.Listener() {
             @Override
             public void onProgress(int progress) {
-                Log.d("Commons Upload Status", progress + "%");
+//                Log.d("Commons Upload Status", progress + "%");
 
                 if (showProgressNotification) {
-                    if (progress > 0)
-                        uploadStatusUpdate(100, progress);
-                    else
+                    if (progress > 0) {
+                        if (progress % 5 == 0)//Update notification every 5% of upload progress
+                            uploadStatusUpdate(100, progress);
+                    } else
                         uploadStatusUpdate(0, 0);
                 }
             }

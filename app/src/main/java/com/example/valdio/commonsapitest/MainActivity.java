@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 
@@ -57,10 +55,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String sharedPreferencesName = "CommonsAPIWrapper";
-        SharedPreferences preferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
-        commons = new Commons(getApplicationContext(), preferences);
+//        String sharedPreferencesName = "CommonsAPIWrapper";
+//        SharedPreferences preferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
+        commons = new Commons(getApplicationContext());
 
+        commons.userLogin("username", "password", new LoginCallback() {
+            @Override
+            public void onLoginSuccessful() {
+                Log.d("onLoginSuccessful", "onLoginSuccessful");
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("onLoginSuccessful", "failure");
+
+            }
+        });
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
 //
 //        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
@@ -222,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
                 commons.uploadContribution(
                         file,
                         user,
-                        "title",
-                        "comment",
-                        "description",
+                        "peaceful nature",
+                        "",
+                        "",
                         ContributionType.IMAGE,
                         Licenses.CreativeCommonsAttributionShareAlike30,
                         R.drawable.upload_icon,

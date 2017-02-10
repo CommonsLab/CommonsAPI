@@ -44,19 +44,15 @@ public class Commons {
 
     private Context context;
     private OkHttpClient client;
-    private SharedPreferences sharedPreferences;
-
 
     /**
      * Commons class constructor
      *
      * @param context
      */
-    public Commons(Context context, SharedPreferences sharedPreferences) {
+    public Commons(Context context) {
         this.context = context;
-        this.sharedPreferences = sharedPreferences; // Store cookies in your own shared preferences. s
-        if (client == null)
-            initOkHttpClient();
+        initOkHttpClient();
     }
 
 
@@ -65,7 +61,7 @@ public class Commons {
      * Init ClearableCookieJar to store Cookies based on SharedPreferences
      */
     private void initOkHttpClient() {
-        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(sharedPreferences));
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
         client = new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
                 .build();

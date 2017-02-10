@@ -49,6 +49,8 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
 
     String response;
 
+    private boolean mediaUploaded = false;
+
     public UploadContributionTask(Context context, OkHttpClient client, File file, User user, String title, String comment, String descriptionText, ContributionType contributionType, String license, int uploadIconResourceId, UploadCallback callback) {
         this.context = context;
         this.client = client;
@@ -175,8 +177,31 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
                 else
                     uploadFailed();
             }
+
+            //callback - notify activity
+            if (uploadedSuccessfully) {
+                callback.onMediaUploadedSuccessfully();
+            } else {
+                String errorMessage = "Failed to upload media";
+                //Parse JSON error
+                if (errorMessage != null)
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        JSONObject error = jsonResponse.getJSONObject("error");
+                        String info = error.getString("info");
+                        if (info != null)
+                            errorMessage = info;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onFailure(errorMessage);
+                    }
+                callback.onFailure(errorMessage);
+            }
+
         } catch (Exception ex) {
             // Handle the error
+            String errorMessage = "Failed to upload media";
+            callback.onFailure(errorMessage);
         }
     }
 
@@ -227,26 +252,5 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     }
 
 
-    @Override
-    protected void onPostExecute(Boolean uploadedSuccessfully) {
-        super.onPostExecute(uploadedSuccessfully);
-        if (uploadedSuccessfully) {
-            callback.onMediaUploadedSuccessfully();
-        } else {
-            String errorMessage = "Failed to upload media";
-            //Parse JSON error
-            if (errorMessage != null)
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONObject error = jsonResponse.getJSONObject("error");
-                    String info = error.getString("info");
-                    if (info != null)
-                        errorMessage = info;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    callback.onFailure(errorMessage);
-                }
-            callback.onFailure(errorMessage);
-        }
-    }
+
 }

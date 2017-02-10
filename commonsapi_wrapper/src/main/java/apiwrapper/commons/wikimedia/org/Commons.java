@@ -1,6 +1,7 @@
 package apiwrapper.commons.wikimedia.org;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -43,15 +44,17 @@ public class Commons {
 
     private Context context;
     private OkHttpClient client;
+    private SharedPreferences sharedPreferences;
+
 
     /**
      * Commons class constructor
      *
      * @param context
      */
-    public Commons(Context context) {
-        this.context = context.getApplicationContext();
-
+    public Commons(Context context, SharedPreferences sharedPreferences) {
+        this.context = context;
+        this.sharedPreferences = sharedPreferences; // Store cookies in your own shared preferences. s
         if (client == null)
             initOkHttpClient();
     }
@@ -62,7 +65,7 @@ public class Commons {
      * Init ClearableCookieJar to store Cookies based on SharedPreferences
      */
     private void initOkHttpClient() {
-        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(sharedPreferences));
         client = new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
                 .build();

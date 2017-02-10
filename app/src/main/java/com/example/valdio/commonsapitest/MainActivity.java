@@ -1,6 +1,8 @@
 package com.example.valdio.commonsapitest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        commons = new Commons(getApplicationContext());
+        String sharedPreferencesName = "CommonsAPIWrapper";
+        SharedPreferences preferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
+        commons = new Commons(getApplicationContext(), preferences);
+
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
 //
 //        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
@@ -237,7 +242,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
 }

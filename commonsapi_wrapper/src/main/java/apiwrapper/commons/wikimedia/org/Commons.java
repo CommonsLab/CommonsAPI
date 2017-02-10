@@ -1,17 +1,14 @@
 package apiwrapper.commons.wikimedia.org;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.valdio.cookiejar.serializablecookiejar.SerializableCookieJar;
 
 import java.io.File;
 
 import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
+import apiwrapper.commons.wikimedia.org.Enums.CookieStatus;
 import apiwrapper.commons.wikimedia.org.Interfaces.CaptchaCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ContributionsCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
@@ -49,10 +46,14 @@ public class Commons {
      * Commons class constructor
      *
      * @param context
+     * @param cookieStatus flag to notify when to enable cookies
      */
-    public Commons(Context context) {
+    public Commons(Context context, CookieStatus cookieStatus) {
         this.context = context;
-        initOkHttpClient();
+        if (cookieStatus == CookieStatus.ENABLED)
+            initOkHttpClientWithCookies();
+        else
+            initOkHttpClient();
     }
 
 
@@ -61,9 +62,12 @@ public class Commons {
      * Init ClearableCookieJar to store Cookies based on SharedPreferences
      */
     private void initOkHttpClient() {
-        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+        client = new OkHttpClient();
+    }
+
+    private void initOkHttpClientWithCookies() {
         client = new OkHttpClient.Builder()
-                .cookieJar(cookieJar)
+                .cookieJar(new SerializableCookieJar(context))
                 .build();
     }
 

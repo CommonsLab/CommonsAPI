@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import apiwrapper.commons.wikimedia.org.Commons;
 import apiwrapper.commons.wikimedia.org.Enums.ContributionType;
+import apiwrapper.commons.wikimedia.org.Enums.CookieStatus;
 import apiwrapper.commons.wikimedia.org.Interfaces.CaptchaCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.ContributionsCallback;
 import apiwrapper.commons.wikimedia.org.Interfaces.CreateAccountCallback;
@@ -55,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
 //        String sharedPreferencesName = "CommonsAPIWrapper";
 //        SharedPreferences preferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
-        commons = new Commons(getApplicationContext());
+        commons = new Commons(getApplicationContext(), CookieStatus.ENABLED);
 
         commons.userLogin("username", "password", new LoginCallback() {
             @Override
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
 //
 //        commons.resetPassword("email@email.com", new ResetPasswordCallback() {
@@ -232,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 commons.uploadContribution(
                         file,
                         user,
-                        "peaceful nature",
+                        "sdsdsd",
                         "",
                         "",
                         ContributionType.IMAGE,

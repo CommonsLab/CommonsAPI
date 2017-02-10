@@ -106,13 +106,11 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
             JSONObject tokens = query.getJSONObject("tokens");
             editToken = tokens.getString("csrftoken");
 
-            prepareForUpload(title, editToken);
+            return prepareForUpload(title, editToken);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
             return false;
         }
-
-        return false;
     }
 
     /**
@@ -152,7 +150,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
     }
 
 
-    public void prepareForUpload(String title, String token) {
+    public boolean prepareForUpload(String title, String token) {
         try {
             /** // Call example
              *
@@ -177,32 +175,13 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
                 else
                     uploadFailed();
             }
-
-            //callback - notify activity
-            if (uploadedSuccessfully) {
-                callback.onMediaUploadedSuccessfully();
-            } else {
-                String errorMessage = "Failed to upload media";
-                //Parse JSON error
-                if (errorMessage != null)
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        JSONObject error = jsonResponse.getJSONObject("error");
-                        String info = error.getString("info");
-                        if (info != null)
-                            errorMessage = info;
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        callback.onFailure(errorMessage);
-                    }
-                callback.onFailure(errorMessage);
-            }
-
+            return uploadedSuccessfully;
         } catch (Exception ex) {
             // Handle the error
             String errorMessage = "Failed to upload media";
             callback.onFailure(errorMessage);
         }
+        return false;
     }
 
     private boolean UPLOAD(String title, String imageFormat, String token, MediaType MEDIA_TYPE) {
@@ -251,6 +230,28 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
         return false;
     }
 
+    @Override
+    protected void onPostExecute(Boolean uploadedSuccessfully) {
+        super.onPostExecute(uploadedSuccessfully);
 
-
+        //callback - notify activity
+        if (uploadedSuccessfully) {
+            callback.onMediaUploadedSuccessfully();
+        } else {
+            String errorMessage = "Failed to upload media";
+            //Parse JSON error
+            if (errorMessage != null)
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONObject error = jsonResponse.getJSONObject("error");
+                    String info = error.getString("info");
+                    if (info != null)
+                        errorMessage = info;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onFailure(errorMessage);
+                }
+            callback.onFailure(errorMessage);
+        }
+    }
 }

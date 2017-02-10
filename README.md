@@ -6,7 +6,7 @@ This library is an efficient way to connect with the Wikimedia Commons [API](htt
 
  I hope it makes it as easy as possible to access the large variety of multimedia files in Wikimedia Commons. 
 
-The API wrapper is built with the help of the [OkHttp](http://square.github.io/okhttp/) networking library and the [PersistentCookieJar](https://github.com/franmontiel/PersistentCookieJar) library for Cookie management through their persistent CookieJar implementation. Many thanks to this great contributions. 
+The API wrapper is built with the help of the [OkHttp](http://square.github.io/okhttp/) networking library. Many thanks to this great contribution. 
 
 
 ### Supported features

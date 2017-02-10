@@ -16,7 +16,7 @@ buildscript {
 }
 
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.valdio'
+group = 'com.github.valdio'
 
 allprojects {
     repositories {

@@ -7,7 +7,7 @@ Commit commands
 
 Version update
 
-- $ git tag -a 1.0.0 -m "v1.0.0"
-- $ git push origin 1.0.0
+- $ git tag -a 1.1.4 -m "v1.1.4"
+- $ git push origin 1.1.4
 - Look Up  in JitPack
 

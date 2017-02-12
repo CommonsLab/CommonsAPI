@@ -15,7 +15,7 @@ public class Contribution implements Parcelable {
     private String mediatype;
     private String ns;
     private String duration; // used for Audio, Video duration.
-                             // Don't use for images, throws Exception
+    // Don't use for images, throws Exception
     private int width;
     private int height;
 
@@ -108,7 +108,6 @@ public class Contribution implements Parcelable {
     }
 
     public Contribution() {
-
     }
 
     @Override

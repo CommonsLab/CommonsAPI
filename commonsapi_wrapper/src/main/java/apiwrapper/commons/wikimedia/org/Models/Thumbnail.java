@@ -1,10 +1,13 @@
 package apiwrapper.commons.wikimedia.org.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Valdio Veliu on 06/01/2017.
  */
 
-public class Thumbnail {
+public class Thumbnail implements Parcelable {
     private String thumbnailURL;
     private int thumbnailWidth;
     private int thumbnailHeight;
@@ -15,6 +18,23 @@ public class Thumbnail {
         this.thumbnailHeight = thumbnailHeight;
     }
 
+    protected Thumbnail(Parcel in) {
+        thumbnailURL = in.readString();
+        thumbnailWidth = in.readInt();
+        thumbnailHeight = in.readInt();
+    }
+
+    public static final Creator<Thumbnail> CREATOR = new Creator<Thumbnail>() {
+        @Override
+        public Thumbnail createFromParcel(Parcel in) {
+            return new Thumbnail(in);
+        }
+
+        @Override
+        public Thumbnail[] newArray(int size) {
+            return new Thumbnail[size];
+        }
+    };
 
     public String getThumbnailURL() {
         return thumbnailURL;
@@ -38,5 +58,17 @@ public class Thumbnail {
 
     public void setThumbnailHeight(int thumbnailHeight) {
         this.thumbnailHeight = thumbnailHeight;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(thumbnailURL);
+        parcel.writeInt(thumbnailWidth);
+        parcel.writeInt(thumbnailHeight);
     }
 }

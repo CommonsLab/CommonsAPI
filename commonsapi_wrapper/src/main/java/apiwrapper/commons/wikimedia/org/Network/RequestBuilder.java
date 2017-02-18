@@ -44,6 +44,7 @@ public class RequestBuilder {
                 .add("username", username)
                 .add("password", password)
                 .add("logintoken", token)
+                .add("rememberMe", "1")
                 .build();
     }
 

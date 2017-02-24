@@ -165,11 +165,7 @@ public class UploadContributionTask extends AsyncTask<Void, Void, Boolean> {
             imageFormat = imageFormat.toLowerCase();
 
             //MediaType MEDIA_TYPE = MediaType.parse("image/png");
-            MediaType MEDIA_TYPE;
-            if (contributionType == ContributionType.IMAGE)
-                MEDIA_TYPE = MediaType.parse(contributionType.toString().toLowerCase() + "/" + imageFormat);
-            else
-                MEDIA_TYPE = MediaType.parse("video/3gpp");
+            MediaType MEDIA_TYPE = MediaType.parse(contributionType.toString().toLowerCase() + "/" + imageFormat);
 
             boolean uploadedSuccessfully = UPLOAD(title, imageFormat, token, MEDIA_TYPE);
 

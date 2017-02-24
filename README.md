@@ -70,7 +70,7 @@ repositories {
 
 ```gradle
 dependencies {
-	    compile 'com.github.valdio:CommonsAPI:1.1.7'
+	    compile 'com.github.valdio:CommonsAPI:1.1.8'
 }
 ```
 

@@ -1,4 +1,4 @@
-#Commons API wrapper
+# Commons API wrapper
 
 Android API wrapper for [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page).
 
@@ -36,8 +36,7 @@ The API wrapper is built with the help of the [OkHttp](http://square.github.io/o
 
 ### Download 
 
-[![](https://jitpack.io/v/valdio/CommonsAPI.svg)](https://jitpack.io/#valdio/CommonsAPI)
-
+[![](https://jitpack.io/v/CommonsLab/CommonsAPI.svg)](https://jitpack.io/#CommonsLab/CommonsAPI)
 
 
 **PERMISSIONS**
@@ -70,7 +69,7 @@ repositories {
 
 ```gradle
 dependencies {
-	    compile 'com.github.valdio:CommonsAPI:1.1.8'
+	    compile 'com.github.CommonsLab:CommonsAPI:1.1.8'
 }
 ```
 

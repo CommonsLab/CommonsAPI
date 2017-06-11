@@ -168,7 +168,6 @@ public class WikimediaCommonsXmlParser {
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(stream, null);
         parser.nextTag();
-
         //Parse description entry:
         return parseDIV(parser);
     }
@@ -184,7 +183,9 @@ public class WikimediaCommonsXmlParser {
                 continue;
             }
             String parserName = parser.getName();
-            if (parserName.equals(TABLE)) {
+            if (parserName.equals(DIV)) {
+                descriptionObject = parseDIV(parser);
+            } else if (parserName.equals(TABLE)) {
                 descriptionObject = parseTABLE(parser);
             } else {
                 skip(parser);

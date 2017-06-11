@@ -69,7 +69,7 @@ repositories {
 
 ```gradle
 dependencies {
-	    compile 'com.github.CommonsLab:CommonsAPI:1.1.8'
+	    compile 'com.github.CommonsLab:CommonsAPI:1.1.9'
 }
 ```
 

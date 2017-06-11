@@ -60,19 +60,35 @@ public class MainActivity extends AppCompatActivity {
 //        String sharedPreferencesName = "CommonsAPIWrapper";
 //        SharedPreferences preferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
         commons = new Commons(getApplicationContext(), CookieStatus.ENABLED);
-
-        commons.userLogin("username", "password", new LoginCallback() {
+        commons.getMediaOfTheDay(new RSS_FeedCallback() {
             @Override
-            public void onLoginSuccessful() {
-                Log.d("onLoginSuccessful", "onLoginSuccessful");
+            public void onFeedReceived(ArrayList<FeedItem> feedItems) {
+                for (int i = 0; i < feedItems.size(); i++) {
+                    Log.wtf("items", feedItems.get(0).getFileName());
+                    Log.wtf("items", feedItems.get(0).getGuid());
+                    Log.wtf("items", feedItems.get(0).getMediaLink());
+                    Log.wtf("items", feedItems.get(0).getPubdate());
+                    Log.wtf("items", feedItems.get(0).getStreamingURL());
+                }
             }
 
             @Override
-            public void onFailure() {
-                Log.d("onLoginSuccessful", "failure");
+            public void onError() {
 
             }
         });
+//        commons.userLogin("username", "password", new LoginCallback() {
+//            @Override
+//            public void onLoginSuccessful() {
+//                Log.d("onLoginSuccessful", "onLoginSuccessful");
+//            }
+//
+//            @Override
+//            public void onFailure() {
+//                Log.d("onLoginSuccessful", "failure");
+//
+//            }
+//        });
 
 
         //get edit token for user to upload to  WIKIMEDIA_COMMONS
